@@ -4,7 +4,8 @@ import FormInput from "../form-input/form-input.component";
 import './signup.styles.scss'
 import Button from "../button/button.component";
 import {signUpStart} from "../../store/user/user.action";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {selectUserError} from "../../store/user/user.selector";
 
 const defaultFromFields = {
     displayName: '',
@@ -20,7 +21,7 @@ const SignUpForm = () => {
 
     const dispatch= useDispatch()
     const {displayName, email, password, confirmPassword} = formFields
-
+    const user = useSelector(selectUserError)
     const resetFormFields = () => {
         setFormFields(defaultFromFields)
     }

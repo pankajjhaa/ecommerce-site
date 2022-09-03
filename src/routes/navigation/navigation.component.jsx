@@ -1,8 +1,9 @@
 import {Outlet} from 'react-router-dom'
-import {ReactComponent as CrownLogo} from "../../assets/crown.svg";
+import {ReactComponent as Logo} from "../../assets/logo.svg";
 import {signOutUser} from "../../utils/firebase/firebase.utils";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
+import logo from "../../assets/logo.png"
 import {
     NavigationContainer,
     LogoContainer,
@@ -24,7 +25,7 @@ const Navigation = () => {
         <>
             <NavigationContainer>
                 <LogoContainer to='/'>
-                    <CrownLogo />
+                    <img alt='logo' width="66px" src={logo}/>
                 </LogoContainer>
                 <NavLinks>
                     <NavLink to='/shop'>SHOP</NavLink>
