@@ -1,5 +1,5 @@
 import orderSuccessLottie from "../../assets/lottie/order_success.json";
-import Lottie from "react-lottie";
+import Lottie from 'lottie-react';
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 

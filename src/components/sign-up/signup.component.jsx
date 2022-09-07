@@ -6,6 +6,8 @@ import Button from "../button/button.component";
 import {signUpStart} from "../../store/user/user.action";
 import {useDispatch, useSelector} from "react-redux";
 import {selectUserError} from "../../store/user/user.selector";
+import {useNavigate} from "react-router-dom";
+import {toast} from "react-toastify";
 
 const defaultFromFields = {
     displayName: '',
@@ -22,9 +24,12 @@ const SignUpForm = () => {
     const dispatch= useDispatch()
     const {displayName, email, password, confirmPassword} = formFields
     const user = useSelector(selectUserError)
+    const navigate = useNavigate()
     const resetFormFields = () => {
         setFormFields(defaultFromFields)
     }
+
+
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -35,8 +40,14 @@ const SignUpForm = () => {
 
         try {
             dispatch(signUpStart(email, password, displayName))
-            resetFormFields()
 
+            console.log("error",user)
+            if(user.error){
+                toast.error(user.error.code)
+                return
+            }
+            navigate('/')
+            resetFormFields()
         } catch (e) {
             if (e.code === 'auth/email-already-in-use') {
                 alert("Email already in use")

@@ -11,6 +11,7 @@ import Payment from "./routes/payment/payment.component";
 import OrderSuccess from "./routes/order-success/order-success.component";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import {GlobalStyle} from "./global.styles";
 
 const App = () => {
     const dispatch = useDispatch()
@@ -21,7 +22,9 @@ const App = () => {
     return (
 
         <>
+            <GlobalStyle />
             <Routes>
+
                 <Route path='/' element={<Navigation/>}>
                     <Route index element={<Home/>}/>
                     <Route path='shop/*' element={<Shop/>}/>

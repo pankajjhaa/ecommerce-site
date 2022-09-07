@@ -3,7 +3,7 @@ import CheckoutItem from '../../components/checkout-item/checkout-item.component
 import './checkout.styles.scss';
 import {useSelector} from "react-redux";
 import {selectCartItems, selectCartTotal} from "../../store/cart/cart.selector";
-import Lottie from 'react-lottie';
+import Lottie from 'lottie-react';
 import emptyCartLottie from '../../assets/lottie/empty-cart.json';
 import {Link} from "react-router-dom";
 import {PaymentButton} from "../../components/payment-form/payment-form.styles";

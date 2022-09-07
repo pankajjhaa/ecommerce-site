@@ -5,7 +5,9 @@ import Button, {BUTTON_TYPES_CLASSES} from "../button/button.component";
 import './signin.styles.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {emailSignInStart, googleSignInStart} from "../../store/user/user.action";
-import {selectUserError} from "../../store/user/user.selector";
+import {selectCurrentUser, selectUserError} from "../../store/user/user.selector";
+import {useNavigate} from "react-router-dom";
+import {toast} from "react-toastify";
 
 const defaultFromFields = {
     email: '',
@@ -18,8 +20,9 @@ const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFromFields)
     const {email, password} = formFields
 
-    const user = useSelector(selectUserError)
-
+    const navigate = useNavigate()
+    const user = useSelector(selectCurrentUser)
+    const userError = useSelector(selectUserError)
     const dispatch = useDispatch()
     const resetFormFields = () => {
         setFormFields(defaultFromFields)
@@ -30,19 +33,26 @@ const SignInForm = () => {
 
         try {
             dispatch(emailSignInStart(email, password))
-            resetFormFields();
-        } catch (e) {
-            console.log('catch' ,e.code)
-            switch (e.code) {
-                case 'auth/wrong-password':
-                    alert('incorrect password for email');
-                    break;
-                case 'auth/user-not-found':
-                    alert('no user associated with this email');
-                    break;
-                default:
-                    console.log(e);
+            if(!user){
+                console.log("userError", userError)
+                toast.error(userError.error.code)
+                return
             }
+            navigate('/')
+            resetFormFields();
+
+        } catch (e) {
+            console.log('catch' ,e)
+            // switch (e.code) {
+            //     case 'auth/wrong-password':
+            //         alert('incorrect password for email');
+            //         break;
+            //     case 'auth/user-not-found':
+            //         alert('no user associated with this email');
+            //         break;
+            //     default:
+            //         console.log(e);
+            // }
         }
 
     }

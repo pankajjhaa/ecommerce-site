@@ -8,7 +8,6 @@ import {selectCurrentUser} from "../../store/user/user.selector";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {removeAllItemsFromCart} from "../../store/cart/cart.action";
-import SweetAlert from "react-bootstrap-sweetalert";
 
 
 const PaymentForm = () => {
