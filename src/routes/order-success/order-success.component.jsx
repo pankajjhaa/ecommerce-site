@@ -1,18 +1,18 @@
 import orderSuccessLottie from "../../assets/lottie/order_success.json";
-import Lottie from 'lottie-react';
+import {useLottie} from 'lottie-react';
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 
 const OrderSuccess = () => {
     const navigation = useNavigate()
-    const defaultOptions = {
-        loop: true,
-        autoplay: true,
+
+    const options = {
         animationData: orderSuccessLottie,
-        rendererSettings: {
-            preserveAspectRatio: "xMidYMid slice"
-        }
+        loop: true,
+        width: "50%"
     };
+
+    const {View} = useLottie(options);
 
     useEffect(() => {
         setTimeout(() => {
@@ -21,11 +21,14 @@ const OrderSuccess = () => {
     }, [])
     return (
         <>
-            <Lottie
-                options={defaultOptions}
-                height={700}
-                width={700}
-            />
+            <div style={{
+                width: '700px', height: "700px", position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)"
+            }}>
+                {View}
+            </div>
         </>
     )
 }

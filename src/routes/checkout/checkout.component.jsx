@@ -3,7 +3,7 @@ import CheckoutItem from '../../components/checkout-item/checkout-item.component
 import './checkout.styles.scss';
 import {useSelector} from "react-redux";
 import {selectCartItems, selectCartTotal} from "../../store/cart/cart.selector";
-import Lottie from 'lottie-react';
+import {useLottie} from 'lottie-react';
 import emptyCartLottie from '../../assets/lottie/empty-cart.json';
 import {Link} from "react-router-dom";
 import {PaymentButton} from "../../components/payment-form/payment-form.styles";
@@ -11,16 +11,16 @@ import {BUTTON_TYPES_CLASSES} from "../../components/button/button.component";
 
 const Checkout = () => {
 
-    const defaultOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: emptyCartLottie,
-        rendererSettings: {
-            preserveAspectRatio: "xMidYMid slice"
-        }
-    };
     const cartItems = useSelector(selectCartItems)
     const cartTotal = useSelector(selectCartTotal)
+
+    const options = {
+        animationData: emptyCartLottie,
+        loop: true,
+        width: "50%"
+    };
+
+    const {View} = useLottie(options);
     return (
 
         <>
@@ -53,11 +53,15 @@ const Checkout = () => {
                     </Link>
                 </div>
                 :
-                <Lottie
-                    options={defaultOptions}
-                    height={700}
-                    width={700}
-                />
+
+                <div style={{
+                    width: '700px', height: "700px", position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)"
+                }}>
+                    {View}
+                </div>
             }
         </>
 
